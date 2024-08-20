@@ -39,6 +39,14 @@
     creates={{ workspace }}/xdebug-{{ php_xdebug_version }}/modules/xdebug.so
   with_items:
     - phpize
+
+- name: Configure Xdebug.
+  command: >
+    {{ item }}
+    chdir={{ workspace }}/xdebug-{{ php_xdebug_version }}
+    creates={{ workspace }}/xdebug-{{ php_xdebug_version }}/modules/xdebug.so
+    --with-php-config=/usr/bin/php-config{{ php_version }}
+  with_items:
     - ./configure
     - make
 
